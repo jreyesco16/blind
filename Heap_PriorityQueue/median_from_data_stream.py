@@ -10,11 +10,11 @@ class MedianFinder:
         self.l.sort()
 
         mid = len(self.l)//2
-
-        if mid % 2 == 0:
+        
+        if len(self.l) % 2 != 0:
             return self.l[mid]
         else:
-            return (self.l[mid]+self.l[mid+1])/2
+            return (self.l[mid-1]+self.l[mid])/2
         
 
 
