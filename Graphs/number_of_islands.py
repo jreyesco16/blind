@@ -23,7 +23,7 @@ class Solution:
                     r, c = row + dr, col + dc
                     if ((r ) in range(rows) and 
                         (c) in range(cols) and
-                        grid[r ][c] == "1" and
+                        grid[r][c] == "1" and
                         (r , c) not in visit):
                         q.append((r , c))
                         visit.add((r , c))

@@ -10,10 +10,10 @@ class Solution:
             if len(w1) > len(w2) and w1[:minLen] == w2[:minLen]:
                 return ""
         
-        for j in range(minLen):
-            if w1[j] != w2[j]:
-                adj[w1[j]].add(w2[j])
-                break
+            for j in range(minLen):
+                if w1[j] != w2[j]:
+                    adj[w1[j]].add(w2[j])
+                    break
         
         visit = {} # False=visited, True=visited & current path
 
@@ -36,6 +36,7 @@ class Solution:
         for c in adj:
             if dfs(c):
                 return ""
+            
         
         res.reverse()
 
