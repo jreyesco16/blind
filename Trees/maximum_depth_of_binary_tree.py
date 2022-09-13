@@ -10,14 +10,12 @@ class Solution:
             return 0
 
         
-        level = 1
+        level = 0
         
         q = deque([root])
 
         while q:
-
             for i in range(len(q)):
-
                 node = q.popleft()
 
                 if node.left:
