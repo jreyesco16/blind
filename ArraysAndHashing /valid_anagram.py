@@ -2,17 +2,14 @@ class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-
-        countS, countT = {}, {}
-
-
+        
+        sD, tD = {}, {}
+        
         for i in range(len(s)):
-            countS[s[i]] = 1 + countS.get(s[i], 0)
-            countT[t[i]] = 1 + countS.get(t[i], 0)
-
-        for c in countS:
-            if countS[c] != countT.get(c, 0):
+            sD[s[i]], tD[t[i]] = 1 + sD.get(s[i], 0), 1 + tD.get(t[i], 0)
+        
+        for k in sD:
+            if sD[k] != tD.get(k, 0):
                 return False
-
+        
         return True
-             
