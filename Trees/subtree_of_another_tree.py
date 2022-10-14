@@ -7,32 +7,19 @@
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         
-        s = [root]
-        
-        # traverse tree in MLR order
-        while s:
-            n = s.pop(0)
+        if not subRoot: return True
+        if not root: return False
 
-            if n.val==subRoot.val:
-                if self.helper(n, subRoot):
-                    return True
-            
-            if n.left:
-                s.append(n.left)
-                
-            if n.right:
-                s.append(n.right)
-                
-        return False
+        if self.sameTree(s,t):
+            return True
+
+        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
     
-    def helper(self, root, subRoot):
-        if not subRoot and not root:
+    def helper(self, s, t):
+        if not s and not t:
             return True
         
-        if not root or not subRoot:
-            return False
+        if s and t and s.val==t.val:
+            return self.helper(s.left, t.left) and self.helper(s.right, t.right)
         
-        if root.val != subRoot.val:
-            return False
-        
-        return self.helper(root.left, subRoot.left) and self.helper(root.right, subRoot.right)
+        return False
