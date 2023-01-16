@@ -10,8 +10,6 @@ class Solution:
         # current 
         c = root
 
-        print("c", c)
-
         while c:
             if p.val > c.val and q.val > c.val:
                 c = c.right
