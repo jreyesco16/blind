@@ -9,38 +9,17 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        root = ListNode()
+        head = tmp = ListNode()
+        arr = []
 
-        d = {}
+        for l in lists:
+            while l != None:
+                arr.append(l.val)
+                l = l.next
 
-        while lists:
-            c = lists.pop(0)
+        for val in sorted(arr):
+            tmp.next = ListNode()
+            tmp = tmp.next
+            tmp.val = val
 
-            # print("c", c)
-
-            if c == None:
-                continue
-
-            if c.val in d:
-                d[c.val].next = c
-                lists.append(c.next)
-                d[c.val].next.next = None
-            else:
-                d[c.val] = c
-                lists.append(c.next)
-                d[c.val].next = None
-
-        keys = list(d.keys())
-
-        keys.sort()
-
-        s = root
-
-        for k in keys:
-            print("d[k]", d[k])
-            s.next = d[k]
-
-            while s.next !=None:
-                s=s.next
-
-        return root.next
+        return head.next
