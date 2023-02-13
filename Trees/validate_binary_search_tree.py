@@ -1,5 +1,3 @@
-from typing import Optional
-
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -8,27 +6,16 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        s = [root]
-
-        while s:
-            n = s.pop()
-
-            if n == None:
-                break
-        
-            if n.left != None:
-                if n.left.val >= n.val:
-                    return False
-                else:
-                    s.append(n.left)
-
-            if n.right != None:
-                if n.right.val <= n.val:
-                    return False
-                else:
-                    s.append(n.right)
-
-        return True
-
-            
+    def isValidBST(self, root: TreeNode) -> bool:
+        def helper(node, lower=float('-inf'), upper=float('inf')):
+            if not node:
+                return True
+            val = node.val
+            if val <= lower or val >= upper:
+                return False
+            if not helper(node.right, val, upper):
+                return False
+            if not helper(node.left, lower, val):
+                return False
+            return True
+        return helper(root)
