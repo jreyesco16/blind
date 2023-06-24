@@ -4,24 +4,21 @@ class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         pre, pos = 1, 1
 
-        pre_nums, pos_nums = [None]*len(nums), [None]*len(nums)
+        pre_list, pos_list = [None]*len(nums), [None]*len(nums)
 
-        for i in range(len(nums)):
+        for i in range(len(nums)): 
             pre *= nums[i]
+            pre_list[i] = pre
 
-            pre_nums[i] = pre
+            pos *= nums[len(nums)-1-i]
+            pos_list[len(nums)-1-i] = pos
 
-        for i in range(len(nums)-1, -1, -1):
-            pos *= nums[i]
-            
-            pos_nums[i] = pos
-        
         for i in range(len(nums)):
             if i == 0:
-                nums[i] = pos_nums[i+1]
+                nums[i] = pos_list[i+1]
             elif i == len(nums)-1:
-                nums[i] = pre_nums[i-1]
+                nums[i] = pre_list[i-1]
             else:
-                nums[i] = pre_nums[i-1] * pos_nums[i+1]
+                nums[i] = pre_list[i-1]*pos_list[i+1]
 
         return nums
