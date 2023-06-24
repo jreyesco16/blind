@@ -3,8 +3,8 @@ class Solution:
         d = {}
 
         for s in strs:
-            res = ''.join(sorted(s))
+            sorted_s = ''.join(sorted(s))
 
-            d[res] = d.get(res, []) + [s] 
+            d[sorted_s] = d.get(sorted_s, []) + [s]
 
         return d.values()
