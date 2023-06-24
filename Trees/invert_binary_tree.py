@@ -8,28 +8,15 @@ class TreeNode:
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        # edge case root is None
         if root == None:
-            return root
+            return
 
-        # edge case left and right are None
-        if root.left == None and root.right == None:
-            return root
+        ### swap left/right nodes
+        orig_left = root.left
+        root.left = root.right
+        root.right = orig_left
 
-        # start recursion
-        self.invertTreeHelper(root)
+        self.invertTree(root.left)
+        self.invertTree(root.right)
 
         return root
-
-    def invertTreeHelper(self, node: Optional[TreeNode]):
-
-        # swap left and right node
-        rootTmp = node.left
-        node.left = node.right
-        node.right = rootTmp
-
-        if node.left != None:
-            self.invertTreeHelper(node.left)
-
-        if node.right != None:
-            self.invertTreeHelper(node.right)
