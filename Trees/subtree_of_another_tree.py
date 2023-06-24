@@ -1,25 +1,40 @@
+from typing import Optional
+
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
+    def helper(self, r: Optional[TreeNode], subRoot: Optional[TreeNode]):
+        if r == None and subRoot == None:
+            return True
+        if r == None and subRoot != None:
+            return False
+        if r != None and subRoot == None:
+            return False
+        if r.val != subRoot.val:
+            return False
+
+        return self.helper(r.left, subRoot.left) and self.helper(r.right, subRoot.right)
+
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        
-        if not subRoot: return True
-        if not root: return False
 
-        if self.sameTree(root,subRoot):
-            return True
+        s = [root] # set
 
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
-    
-    def sameTree(self, s, t):
-        if not s and not t:
-            return True
-        
-        if s and t and s.val==t.val:
-            return self.sameTree(s.left, t.left) and self.sameTree(s.right, t.right)
-        
-        return False
+        while s:
+            c = s.pop() # current
+
+            if c == None:
+                return False
+
+            if self.helper(c, subRoot):
+                return True
+
+            if c.left != None:
+                s.append(c.left)
+
+            if c.right != None:
+                s.append(c.right)
