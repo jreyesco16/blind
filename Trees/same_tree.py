@@ -7,31 +7,17 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def helper(self, root: Optional[TreeNode]) -> List[int]:
-        r = [] # result 
-        s = [root] # stack
-
-        while s:
-            c = s.pop() # current
-            
-            if c == None:
-                return
-
-            r.append(c.val)
-
-            if c.left != None:
-                s.append(c.left)
-            else:
-                r.append(None)
-
-            if c.right != None:
-                s.append(c.right)
-
-        return r
-            
-
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        p_l = self.helper(p) # p traversed list
-        q_l = self.helper(q) # q traversed list
+        if p == None and q == None:
+            return True
 
-        return p_l == q_l
+        if p != None and q == None:
+            return False
+        
+        if p == None and q != None:
+            return False
+
+        if p.val != q.val:
+            return False
+
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
