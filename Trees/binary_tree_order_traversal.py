@@ -9,24 +9,21 @@ class TreeNode:
 
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        a = []
+        l = []
+        q = [root]
 
-        def dfs(root: Optional[TreeNode], depth: int):
-            # edge case
-            if root == None:
-                return
+        while q:
+            level = []
 
-            if len(a) <= depth:
-                a.append([])
-            
-            a[depth].append(root.val)
+            for i in range(len(q)):
+                c = q.pop(0)
 
-            if root.left != None:
-                dfs(root.left, depth+1)
-            
-            if root.right != None:
-                dfs(root.right, depth+1)
+                if c:
+                    level.append(c.val)
+                    q.append(c.left)
+                    q.append(c.right)
 
-        dfs(root, 0)
 
-        return a
+            if level: l.append(level)
+                
+        return l
